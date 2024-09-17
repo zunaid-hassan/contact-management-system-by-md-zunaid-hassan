@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact List{% endblock %}
+
+{% block content %}
+    <h2>Contact List</h2>
+    <form method="get">
+        <input type="text" name="q" placeholder="Search contacts" value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+    {% if contacts %}
+        <ul>
+            {% for contact in contacts %}
+                <li>
+                    <a href="{% url 'contact_detail' contact.pk %}">{{ contact.first_name }} {{ contact.last_name }}</a>
+                    - {{ contact.email }} - {{ contact.phone_number }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No contacts found.</p>
+    {% endif %}
+{% endblock %}
